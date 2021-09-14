@@ -1,25 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Calculator from './pages/calculator';
+import { CssBaseline, MuiThemeProvider } from '@material-ui/core';
+import { createCustomTheme } from './theme';
+import useSettings from './hooks/useSettings';
 
 function App() {
+  const { settings } = useSettings();
+  const theme = createCustomTheme({
+    theme: settings.theme,
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
+      <div className="App">
+        <Calculator />
+      </div>
+    </MuiThemeProvider>
   );
 }
 
